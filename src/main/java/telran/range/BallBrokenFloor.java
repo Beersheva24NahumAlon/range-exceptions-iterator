@@ -11,7 +11,7 @@ public class BallBrokenFloor {
         minBrokenFloor = new Random().nextInt(1, nFloors + 1);
     }
 
-    public void checkFloor (int floor) throws Exception {
+    public void checkFloor(int floor) throws Exception {
         if (floor > nFloors) {
             throw new IllegalArgumentException();
         }
@@ -22,9 +22,5 @@ public class BallBrokenFloor {
 
     public int getMinBrokenFloor() {
         return minBrokenFloor;
-    }
-
-    public int getNFloors() {
-        return nFloors;
     }
 }
