@@ -24,4 +24,7 @@ public class BallBrokenFloor {
         return minBrokenFloor;
     }
 
+    public int getNFloors() {
+        return nFloors;
+    }
 }

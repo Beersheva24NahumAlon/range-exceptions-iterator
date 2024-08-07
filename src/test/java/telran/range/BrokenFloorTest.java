@@ -6,8 +6,19 @@ import org.junit.jupiter.api.Test;
 
 public class BrokenFloorTest {
     private int getMinimalBrokenFloor(BallBrokenFloor bbf) {
-        // TODO
-        return -1;
+        int start = 1;
+        int finish = bbf.getNFloors();
+        int middle = (start + finish) / 2;
+        while (start <= finish) {
+            try {
+                bbf.checkFloor(middle);
+                start = middle + 1;
+            } catch (Exception e) {
+                finish = middle - 1;
+            }
+            middle = (start + finish) / 2;
+        }
+        return start;
     }
 
     @Test
