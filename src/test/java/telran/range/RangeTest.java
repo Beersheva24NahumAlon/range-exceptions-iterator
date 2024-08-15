@@ -18,7 +18,7 @@ public class RangeTest {
 
     @Test
     void rightNumberTest() throws OutOfRangeMaxValueException, OutOfRangeMinValueException {
-            range.checkNumber(7);
+        range.checkNumber(7);
     }
 
     @Test
@@ -29,10 +29,33 @@ public class RangeTest {
 
     @Test
     void iteratorTest() {
-        //TODO
-        Range rangeIt = Range.getRange(0, 2);
-        Iterator<Integer> it = rangeIt.iterator();
-        Integer[] expected = { 0, 1, 2 };
+        Range rangeIt1 = Range.getRange(0, 6);
+        rangeIt1.setPredicate(n -> n % 2 != 0);
+        Integer[] expected1 = { 1, 3, 5 };
+        assertForInterators(rangeIt1, expected1);
+
+        Range rangeIt2 = Range.getRange(0, 10);
+        rangeIt2.setPredicate(n -> n % 2 == 0);
+        Integer[] expected2 = { 0, 2, 4, 6, 8, 10 };
+        assertForInterators(rangeIt2, expected2);
+
+        Range rangeIt3 = Range.getRange(0, 50);
+        rangeIt3.setPredicate(n -> n % 10 == 0);
+        Integer[] expected3 = { 0, 10, 20, 30, 40, 50 };
+        assertForInterators(rangeIt3, expected3);
+
+        Range rangeIt4 = Range.getRange(1, 9);
+        rangeIt4.setPredicate(n -> n % 10 == 0);
+        Integer[] expected4 = {};
+        assertForInterators(rangeIt4, expected4);
+
+        Range rangeIt5 = Range.getRange(1, 5);
+        Integer[] expected5 = { 1, 2, 3, 4, 5 };
+        assertForInterators(rangeIt5, expected5);
+    }
+
+    void assertForInterators(Range range, Integer[] expected) {
+        Iterator<Integer> it = range.iterator();
         Integer[] actual = new Integer[expected.length];
         int i = 0;
         while (it.hasNext()) {
