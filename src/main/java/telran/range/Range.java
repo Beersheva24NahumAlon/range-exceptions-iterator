@@ -50,16 +50,15 @@ public class Range implements Iterable<Integer> {
 
         @Override
         public boolean hasNext() {
-            //return find() != null;
             return current <= max;
         }
 
         @Override
         public Integer next() {
-            if (!hasNext()) {
+            Integer res = find();
+            if (res == null) {
                 throw new NoSuchElementException();
             }
-            int res = find();
             current = res + 1;
             return res;
         }
