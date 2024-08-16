@@ -43,9 +43,14 @@ public class Range implements Iterable<Integer> {
     private class RangeIterator implements Iterator<Integer> {
         int current = min;
 
+        RangeIterator() {
+            Integer first = find();
+            this.current = first != null ? first : min;
+        }
+
         @Override
         public boolean hasNext() {
-            return find() >= 0;
+            return find() != null;
         }
 
         @Override
@@ -63,7 +68,7 @@ public class Range implements Iterable<Integer> {
             while (!predicate.test(cur) && cur <= max) {
                 cur++;
             }
-            return cur > max ? -1 : cur;
+            return cur > max ? null : cur;
         }
     }
 }
