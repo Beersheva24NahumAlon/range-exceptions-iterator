@@ -58,7 +58,7 @@ public class RangeTest {
         Iterator<Integer> it = range.iterator();
         Integer[] actual = new Integer[expected.length];
         int i = 0;
-        while (i < actual.length) {
+        while (it.hasNext()) {
             actual[i++] = it.next();
         }
         assertArrayEquals(expected, actual);

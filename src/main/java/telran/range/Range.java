@@ -41,11 +41,12 @@ public class Range implements Iterable<Integer> {
     }
 
     private class RangeIterator implements Iterator<Integer> {
-        int current = min;
+        Integer current = min;
 
         RangeIterator() {
-            Integer first = find();
-            this.current = first != null ? first : min;
+            if(!predicate.test(current)) {
+                current = findNext();
+            }
         }
 
         @Override
@@ -55,20 +56,20 @@ public class Range implements Iterable<Integer> {
 
         @Override
         public Integer next() {
-            Integer res = find();
-            if (res == null) {
+            if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            current = res + 1;
+            Integer res = current; 
+            current = findNext(); 
             return res;
         }
 
-        private Integer find() {
-            int cur = current;
+        private Integer findNext() {
+            int cur = current + 1;
             while (!predicate.test(cur) && cur <= max) {
                 cur++;
             }
-            return cur > max ? null : cur;
+            return cur;
         }
     }
 }
