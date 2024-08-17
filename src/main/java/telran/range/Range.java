@@ -41,12 +41,10 @@ public class Range implements Iterable<Integer> {
     }
 
     private class RangeIterator implements Iterator<Integer> {
-        Integer current = min;
+        Integer current = min - 1;
 
         RangeIterator() {
-            if(!predicate.test(current)) {
-                current = findNext();
-            }
+            current = findNext();
         }
 
         @Override
@@ -66,7 +64,7 @@ public class Range implements Iterable<Integer> {
 
         private Integer findNext() {
             int cur = current + 1;
-            while (!predicate.test(cur) && cur <= max) {
+            while (cur <= max && !predicate.test(cur)) {
                 cur++;
             }
             return cur;
